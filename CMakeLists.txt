@@ -1,12 +1,14 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.11)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 project(gueepo2D-sample)
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 # dependencies
 add_subdirectory(src/lib/gueepo2D/gueepo2D/thirdparty/glad)
 add_subdirectory(src/lib/gueepo2D/gueepo2D/thirdparty/imgui-docking)
 add_subdirectory(src/lib/gueepo2D/gueepo2D/engine)
+set_target_properties(glad dearimgui gueepo2D-engine PROPERTIES FOLDER thirdparty)
 
 add_executable(${PROJECT_NAME}
     src/main.cpp
@@ -35,4 +37,6 @@ if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/assets)
 endif()
 
 
-set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${PROJECT_NAME})
+if(MSVC)
+    set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${PROJECT_NAME})
+endif()
