@@ -1,3 +1,4 @@
+#define GUEEPO2D_MAIN
 #include <gueepo2d.h>
 
 class Sample : public gueepo::Application {
